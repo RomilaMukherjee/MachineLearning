@@ -7,4 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #re_path('.*', TemplateView.as_view(template_name='index.html')),
     url(r'^webapp/', include('webapp.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('rest-auth/', include('rest_auth.urls')),
+    re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]

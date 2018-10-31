@@ -4,19 +4,24 @@ import "./App.css";
 import * as d3 from "d3";
 //import * as data from "./data.json";
 import styles from "./App.css";
+import { color } from "d3-color";
 
 class D3Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      selectedOption: 'hourly'
     };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   componentDidMount() {
     fetch("http://127.0.0.1:8000/monthlychart/")
       .then(response => response.json())
-      .then(data => this.setState({ data: data }));
+      .then(data => this.setState({ data: data}));
+    this.getInitialState();  
     this.draw();
   }
 
@@ -124,17 +129,60 @@ class D3Chart extends React.Component {
       .attr("d", lineCount);
   }
 
+  getInitialState() {
+    return {
+      selectedOption: 'hourly'
+    };
+  }
+
+  handleOptionChange(changeEvent) {
+    this.setState({
+      selectedOption: changeEvent.target.value
+    });
+  }
+
+  handleFormSubmit(formSubmitEvent) {
+    formSubmitEvent.preventDefault();
+    alert('A name was submitted: ' + this.state.selectedOption);
+    console.log('You have selected:', this.state.selectedOption);
+  }
+  
+
   render() {
     console.log("data" + this.state.data[0]);
     return (
-      <div className="chart">
+        <div className="chart">
         <h3>Visualizing Data with React and D3</h3>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+
+              <form onSubmit={this.handleFormSubmit}>
+              <div style={{display: 'flex', flexDirection: 'row', marginLeft: '100px'}}>
+                <div className="radio">
+                  <label>
+                     <input type="radio" value="hourly" style={{marginLeft: '100px', marginTop: '20px'}} checked={this.state.selectedOption === 'hourly'} onClick={this.handleOptionChange} onChange={this.handleOptionChange} />
+                     Hourly
+                  </label>
+                </div>
+                <div className="radio">
+                  <label>
+                    <input type="radio" value="weekly" style={{marginLeft: '100px', marginTop: '20px'}} checked={this.state.selectedOption === 'weekly'} onClick={this.handleOptionChange} onChange={this.handleOptionChange}/>
+                    Weekly
+                  </label>
+                </div>
+                <button className="btn btn-default" type="submit" style={{marginLeft: '100px',color: 'white', backgroundColor: 'blue'}}>Predict</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <svg
           width="960"
           height="500"
           style={{ border: "solid 1px #eee", borderBottom: "solid 1px #ccc" }}
         />
-      </div>
+        </div>
     );
   }
 }

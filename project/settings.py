@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_auth',
     'rest_auth.registration',
-    'rest_framework',
     'rest_framework.authtoken',
 ]
 
@@ -136,4 +135,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
 ]
-

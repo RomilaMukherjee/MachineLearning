@@ -2,16 +2,21 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import * as d3 from "d3";
-import * as data from "./data.json";
+//import * as data from "./data.json";
 import styles from "./App.css";
 
 class D3Chart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: "" };
+    this.state = {
+      data: []
+    };
   }
 
   componentDidMount() {
+    fetch("http://127.0.0.1:8000/monthlychart/")
+      .then(response => response.json())
+      .then(data => this.setState({ data: data }));
     this.draw();
   }
 
@@ -45,12 +50,12 @@ class D3Chart extends React.Component {
       });
 
     x.domain(
-      d3.extent(data, function(d) {
+      d3.extent(this.state.data, function(d) {
         return d.week;
       })
     );
     y.domain(
-      d3.extent(data, function(d) {
+      d3.extent(this.state.data, function(d) {
         return d.users;
       })
     );
@@ -114,13 +119,13 @@ class D3Chart extends React.Component {
       .text("Week #");
 
     g.append("path")
-      .datum(data)
+      .datum(this.state.data)
       .attr("class", `lineUsers`)
       .attr("d", lineCount);
   }
 
   render() {
-    console.log("data" + data[0]);
+    console.log("data" + this.state.data[0]);
     return (
       <div className="chart">
         <h3>Visualizing Data with React and D3</h3>

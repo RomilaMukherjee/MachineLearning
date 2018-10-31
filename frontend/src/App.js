@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import BaseRouter from "./routes";
 import "antd/dist/antd.css";
 import * as actions from "./store/actions/auth";
-import Chart from "./Chart";
+import D3Chart from "./Chart";
 
 import CustomLayout from "./containers/Layout";
 
@@ -16,6 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <D3Chart />
         <Router>
           <CustomLayout {...this.props}>
             <BaseRouter />

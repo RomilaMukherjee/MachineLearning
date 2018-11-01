@@ -11,7 +11,8 @@ class D3Chart extends React.Component {
     super(props);
     this.state = {
       data: [],
-      selectedOption: 'hourly'
+      selectedOption: 'hourly',
+      nextDate: new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + (new Date().getDate()+1)
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -143,7 +144,7 @@ class D3Chart extends React.Component {
 
   handleFormSubmit(formSubmitEvent) {
     formSubmitEvent.preventDefault();
-    alert('A name was submitted: ' + this.state.selectedOption);
+    alert('A name was submitted: '+ this.state.nextDate +' & ' + this.state.selectedOption);
     console.log('You have selected:', this.state.selectedOption);
   }
   

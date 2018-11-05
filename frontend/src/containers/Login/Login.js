@@ -15,7 +15,6 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onAuth(values.userName, values.password);
-        //this.props = {isAuthenticated: true}
         if(this.props.isAuthenticated){
             this.props.history.push('/chart');
         }

@@ -12,3 +12,11 @@ class employee(models.Model):
 
     def _str_(self):
         return self.firstName
+
+class region(models.Model):
+    latitue = models.CharField(max_length=20)
+    longitutude = models.CharField(max_length=20)  
+    name = models.CharField(max_length=20)
+
+    def _str_(self):
+        return self.name       

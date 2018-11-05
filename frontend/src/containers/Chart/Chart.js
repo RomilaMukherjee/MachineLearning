@@ -1,7 +1,7 @@
 import React from "react";
 //import logo from "./logo.svg";
 import "../App/App.css";
-import * as d3 from "d3";
+import { Line } from "react-chartjs-2";
 //import * as data from "./data.json";
 //import styles from "./App.css";
 //import { color } from "d3-color";
@@ -11,6 +11,7 @@ class D3Chart extends React.Component {
     super(props);
     this.state = {
       data: [],
+      showGraph:false,
       selectedOption: 'hourly',
       nextDate: new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + (new Date().getDate()+1)
     };
@@ -22,10 +23,10 @@ class D3Chart extends React.Component {
     fetch("http://127.0.0.1:8000/monthlychart/")
       .then(response => response.json())
       .then(data => this.setState({ data: data}));
-    this.getInitialState();  
+    //this.getInitialState();  
     //this.draw();
   }
-
+/*
   draw() {
     const svg = d3.select("svg"),
       margin = { top: 50, right: 20, bottom: 50, left: 50 },
@@ -41,7 +42,7 @@ class D3Chart extends React.Component {
     const make_x_grid_lines = () => {
       return d3.axisBottom(x).ticks(10);
     };
-    //
+    
     const make_y_gridlines = () => {
       return d3.axisLeft(y).ticks(10);
     };
@@ -130,13 +131,13 @@ class D3Chart extends React.Component {
       .datum(this.state.data)
       .attr("class", `lineUsers`)
       .attr("d", lineCount);
-  }
+  }*/
 
-  getInitialState() {
+  /*getInitialState() {
     return {
       selectedOption: 'hourly'
     };
-  }
+  }*/
 
   handleOptionChange(changeEvent) {
     this.setState({
@@ -147,16 +148,21 @@ class D3Chart extends React.Component {
   handleFormSubmit(formSubmitEvent) {
     formSubmitEvent.preventDefault();
     alert('A name was submitted: '+ this.state.nextDate +' & ' + this.state.selectedOption);
-    this.draw();
+    this.setState({
+         showGraph: true
+    });
+    //this.draw();
     console.log('You have selected:', this.state.selectedOption);
   }
-  
+  draw(){
 
+  }
+  
   render() {
     console.log("data" + this.state.data[0]);
     return (
         <div className="chart">
-        <h3>Visualizing Data with React and D3</h3>
+        <h3>Visualizing Data with React and Chartjs</h3>
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
@@ -177,18 +183,41 @@ class D3Chart extends React.Component {
                 </div>
                 <button className="btn btn-default" type="submit" style={{marginLeft: '100px',color: 'white', backgroundColor: 'blue'}}>Predict</button>
                 </div>
+                {this.state.showGraph && <Line data={data}/>}
               </form>
             </div>
           </div>
-        </div>
-        <svg
-          width="1000"
-          height="550"
-          style={{ border: "solid 1px #eee", borderBottom: "solid 1px #ccc" }}
-        />
+        </div>  
         </div>
     );
   }
 }
+
+const data = {
+  labels: ["2018-11-06","2018-11-07","2018-11-08","2018-11-09","2018-11-10"],
+  datasets: [
+    {
+      label: "My First dataset",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: "rgba(75,192,192,0.4)",
+      borderColor: "rgba(75,192,192,1)",
+      borderCapStyle: "butt",
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: "miter",
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [8235.8515625,  8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125]
+    }
+  ]
+};
 
 export default D3Chart;

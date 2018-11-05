@@ -44,6 +44,12 @@ class CustomLayout extends React.Component {
                         :
                         <Breadcrumb.Item/>
                     }
+                    {
+                        this.props.isAuthenticated?
+                        <Breadcrumb.Item><Link to="/map">View Map</Link></Breadcrumb.Item>
+                        :
+                        <Breadcrumb.Item/>
+                    }
                     
                 </Breadcrumb>
                 <div className="App-header">

@@ -23,9 +23,12 @@ class D3Chart extends React.Component {
     fetch("http://127.0.0.1:8000/monthlychart/")
       .then(response => response.json())
       .then(data => this.setState({ data: data}));
-    //this.getInitialState();  
-    //this.draw();
+      //this.EnergyData();
   }
+  /*EnergyData(){
+    $.getJSON('http://172.17.81.164:8000/consumption/?nextDate='+this.state.nextDate+'&selectedOption='+this.state.selectedOption)
+       .then(({results}) => this.setState({ data: results}));
+  }*/
 /*
   draw() {
     const svg = d3.select("svg"),
@@ -133,12 +136,6 @@ class D3Chart extends React.Component {
       .attr("d", lineCount);
   }*/
 
-  /*getInitialState() {
-    return {
-      selectedOption: 'hourly'
-    };
-  }*/
-
   handleOptionChange(changeEvent) {
     this.setState({
       selectedOption: changeEvent.target.value
@@ -151,11 +148,7 @@ class D3Chart extends React.Component {
     this.setState({
          showGraph: true
     });
-    //this.draw();
     console.log('You have selected:', this.state.selectedOption);
-  }
-  draw(){
-
   }
   
   render() {
@@ -168,7 +161,7 @@ class D3Chart extends React.Component {
             <div className="col-sm-12">
 
               <form onSubmit={this.handleFormSubmit}>
-              <div style={{display: 'flex', flexDirection: 'row', marginLeft: '100px'}}>
+              <div style={{display: 'flex', flexDirection: 'row', marginLeft: '200px'}}>
                 <div className="radio">
                   <label>
                      <input type="radio" value="hourly" style={{marginLeft: '100px', marginTop: '20px'}} checked={this.state.selectedOption === 'hourly'} onClick={this.handleOptionChange} onChange={this.handleOptionChange} />
@@ -181,7 +174,7 @@ class D3Chart extends React.Component {
                     Weekly
                   </label>
                 </div>
-                <button className="btn btn-default" type="submit" style={{marginLeft: '100px',color: 'white', backgroundColor: 'blue'}}>Predict</button>
+                <button className="btn btn-default" type="submit" style={{marginLeft: '100px',marginRight: '200px',color: 'white', backgroundColor: 'blue'}}>Predict</button>
                 </div>
                 {this.state.showGraph && <Line data={data}/>}
               </form>
@@ -192,32 +185,34 @@ class D3Chart extends React.Component {
     );
   }
 }
-
+//const $ = window.$;
 const data = {
-  labels: ["2018-11-06","2018-11-07","2018-11-08","2018-11-09","2018-11-10"],
+  labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
   datasets: [
-    {
-      label: "My First dataset",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [8235.8515625,  8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125]
-    }
+  {
+  label: "Energy Consumption Data",
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: "rgba(75,192,192,0.4)",
+  borderColor: "rgba(75,192,192,1)",
+  borderCapStyle: "butt",
+  borderDash: [],
+  borderDashOffset: 0.0,
+  borderJoinStyle: "miter",
+  pointBorderColor: "rgba(75,192,192,1)",
+  pointBackgroundColor: "#fff",
+  pointBorderWidth: 1,
+  pointHoverRadius: 5,
+  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+  pointHoverBorderColor: "rgba(220,220,220,1)",
+  pointHoverBorderWidth: 2,
+  pointRadius: 1,
+  pointHitRadius: 10,
+  data: [8235.8515625, 8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125,8235.8515625, 8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125,8235.8515625, 8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125,8235.8515625, 8158.4765625, 8486.0302734375, 8813.091796875, 9333.2783203125,8235.8515625, 8158.4765625, 8486.0302734375, 8813.091796875]
+  }
   ]
-};
+  };
+
+
 
 export default D3Chart;

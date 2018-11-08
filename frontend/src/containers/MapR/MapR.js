@@ -64,6 +64,7 @@ render() {
                             style={{marginLeft: '-187px'}}
                         />
                         <button className="btn btn-default" style={{marginRight: '200px', marginBottom: '200px',color: 'white', backgroundColor: 'blue'}}>Add</button>
+                        <button onClick={this.props.closePopup} style={{marginRight: '50px', marginTop: '0px',color: 'white', backgroundColor: 'blue'}}>close</button>
                     </GooglePlacesSuggest>
                 )
             }

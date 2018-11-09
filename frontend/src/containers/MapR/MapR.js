@@ -97,27 +97,23 @@ class MapR extends React.Component {
       });
     }
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/webapp/regdata')
-         .then(function(res) {
-             console.log(res.data);
-             return res.json();
-         }).then(function(json) {
-             this.setState({
-                values: json
-             })
+        axios.get('http://127.0.0.1:8000/webapp/regdata/')
+         .then(res =>{
+            this.setState({ values: res.data.regions });
          });
-     }
+        }
+             
   render() {
-    return <div className="drop-down">
+    return <div className="drop-down" style={{marginTop: '0px',marginBottom: '275px',marginLeft: '150px',marginRight: '150px'}}>
     <p>Select a Region to View Prediction</p>
-      <select style={{marginLeft: '200px'}}>{
+      <select style={{marginLeft: '10px'}}>{
 
          this.state.values.map((obj) => {
              return <option value={obj.id}>{obj.name}</option>
          })
       }</select>
         <button className="btn btn-default" onClick={this.handleClick} style={{marginLeft: '20px',color: 'white', backgroundColor: 'blue'}}>View Prediction</button>
-        <button className="btn btn-default" onClick={this.togglePopup.bind(this)} style={{marginLeft: '100px',marginRight: '200px',color: 'white', backgroundColor: 'blue'}}>Add Region</button>
+        <button className="btn btn-default" onClick={this.togglePopup.bind(this)} style={{marginLeft: '100px',marginRight: '150px',color: 'white', backgroundColor: 'blue'}}>Add Region</button>
         {this.state.showPopup ? 
           <Popup
             text='Add Region'

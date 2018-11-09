@@ -18,7 +18,8 @@ class employeeList(APIView):
     def getEmp(request):
         employees1 = employee.objects.all()
         serailizer = employeeSerializer(employees1, many=True)
-        return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
+        json_emp = {"employees" : serailizer.data}
+        return HttpResponse(json.dumps(json_emp), content_type="application/json")
 
     def postEmp(self):
         pass
@@ -32,7 +33,8 @@ class employeeList(APIView):
     def getReg(request):
         region1 = region.objects.all()
         serailizer = regionSerializer(region1, many=True)
-        return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
+        json_reg = {"regions" : serailizer.data}
+        return HttpResponse(json.dumps(json_reg), content_type="application/json")
     def postReg(self):
         pass
 

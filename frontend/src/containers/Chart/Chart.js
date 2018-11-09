@@ -88,28 +88,28 @@ class D3Chart extends React.Component {
     };
     console.log("render :" + this.state.xdata);
     return (
-        <div className="chart">
+        <div className="chart" style={{marginTop: '10px'}}>
         <h3>Visualizing Data with React and Chartjs</h3>
-        <div className="container">
+        <div className="container" >
           <div className="row">
             <div className="col-sm-12">
 
-              <form> 
-              <div style={{display: 'flex', flexDirection: 'row', marginLeft: '250px'}}>
+              <form style={{marginBottom: '10px'}}> 
+              <div style={{display: 'flex', flexDirection: 'row', marginLeft: '350px'}}>
                 <div className="radio">
                   <label>
-                     <input type="radio" value="hourly" style={{marginLeft: '100px', marginTop: '20px'}} checked={this.state.selectedOption === 'hourly'}  onClick={this.handleChartChange}/>
+                     <input type="radio" value="hourly" style={{marginLeft: '100px', marginTop: '0px'}} checked={this.state.selectedOption === 'hourly'}  onClick={this.handleChartChange}/>
                      Hourly
                   </label>
                 </div>
                 <div className="radio">
-                  <label style={{marginRight: '250px'}}>
-                    <input type="radio" value="weekly" style={{marginLeft: '100px', marginTop: '20px'}} checked={this.state.selectedOption === 'weekly'}  onClick={this.handleOptionChange}/>
+                  <label style={{marginRight: '350px'}}>
+                    <input type="radio" value="weekly" style={{marginLeft: '100px', marginTop: '0px'}} checked={this.state.selectedOption === 'weekly'}  onClick={this.handleOptionChange}/>
                     Weekly
                   </label>
                 </div>
                 
-                </div>
+              </div>
                 {this.state.showGraph && <Line data={data}/>}
               </form>
             </div>

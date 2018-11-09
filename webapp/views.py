@@ -12,7 +12,7 @@ import json
 
 class employeeList(APIView):
 
-    def get(self, request):
+    def getEmp(self, request):
         employees1 = employee.objects.all()
         serailizer = employeeSerializer(employees1, many=True)
         return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
@@ -26,7 +26,7 @@ class employeeList(APIView):
            {"id": "2018-11-13", "value": "8235.8515625"}]}
         return HttpResponse(json.dumps(json_string), content_type='application/json')
 
-    def get(self, request):
+    def getReg(self, request):
         region1 = region.objects.all()
         serailizer = employeeSerializer(region1, many=True)
         return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
@@ -38,4 +38,5 @@ class employeeList(APIView):
             json_result = {"authenticated" :True}
         else:
             json_result = {"authenticated" :False}
-        return HttpResponse(json.dumps(json_result), content_type='application/json')    
+        return HttpResponse(json.dumps(json_result), content_type='application/json')   
+

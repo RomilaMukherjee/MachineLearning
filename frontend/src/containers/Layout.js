@@ -2,12 +2,15 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/auth';
+import * as actions from '../store/actions/actionTypes';
 import green from '../../src/green.svg'
+import { bindActionCreators } from 'redux';
+import {storeAuthentication} from '../store/actions/auth'
 
 const { Header, Content, Footer } = Layout;
 
 class CustomLayout extends React.Component {
+    
     render() {
         return (
             <Layout className="App">
@@ -38,15 +41,10 @@ class CustomLayout extends React.Component {
                 <Content style={{ padding: '0 50px' }}>
                 <Breadcrumb style={{ margin: '16px 0' }} className="Head">
                     <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+                    
                     {
                         this.props.isAuthenticated?
-                        <Breadcrumb.Item><Link to="/chart">View Prediction</Link></Breadcrumb.Item>
-                        :
-                        <Breadcrumb.Item/>
-                    }
-                    {
-                        this.props.isAuthenticated?
-                        <Breadcrumb.Item><Link to="/map">View Map</Link></Breadcrumb.Item>
+                        <Breadcrumb.Item><Link to="/map">Select Region</Link></Breadcrumb.Item>
                         :
                         <Breadcrumb.Item/>
                     }
@@ -70,10 +68,17 @@ class CustomLayout extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+//const mapStateToProps = state => ({ isAuthenticated:state.isAuthenticated });
+
+/*const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(actions.logout())
+        logout: () => dispatch(actions.logout),
     }
-}
+}*/
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({
+        storeAuthentication
+    }, dispatch);
+
 
 export default withRouter(connect(null, mapDispatchToProps)(CustomLayout));

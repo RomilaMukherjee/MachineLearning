@@ -19,8 +19,46 @@
   justify-content: center;
 }
 
+.popup {
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+ .popup_inner {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 15%;
+  bottom: 25%;
+  margin: auto;
+  background: white;
+}
+ .location-search-input{
+  position:center;
+  margin: 15%;
+} 
+
 .App-link {
   color: #61dafb;
+}
+
+.kPwAKu{
+  position: relative !important;
+  top: 20% !important;
+  left: 0px !important;
+  right: 0px !important;
+  box-shadow: rgb(219, 219, 220) 0px 0.4rem 0.5rem 0.0625rem !important;
+  z-index: 2;
+  background: white;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 @keyframes App-logo-spin {

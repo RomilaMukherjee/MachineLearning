@@ -4,9 +4,9 @@ import Login from "./containers/Login/Login";
 import D3Chart from "./containers/Chart/Chart";
 import MapR from "./containers/MapR/MapR";
 
-const BaseRouter = () => (
+const BaseRouter = (props) => (
   <div>
-    <Route exact path="/login/" component={Login} />
+    <Route exact path="/login/" component={Login}/>
     <Route path="/chart/" component={D3Chart}/>
     <Route path="/map/" component={MapR}/>
   </div>

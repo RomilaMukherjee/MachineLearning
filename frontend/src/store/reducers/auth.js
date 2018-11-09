@@ -4,34 +4,38 @@ import { updateObject } from '../utility';
 const initialState = {
     token: null,
     error: null, 
-    loading: false
+    loading: false,
+    isAuthenticated:false
 }
 
 const authStart = (state, action) => {
     return updateObject(state, {
         error: null,
-        loading: true
+        loading: true,
+        isAuthenticated:false
     });
 }
 
 const authSuccess = (state, action) => {
     return updateObject(state, {
-        token: action.token,
         error: null,
-        loading: false
+        loading: false,
+        isAuthenticated:true
     });
 }
 
 const authFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
-        loading: false
+        loading: false,
+        isAuthenticated:false
     });
 }
 
 const authLogout = (state, action) => {
     return updateObject(state, {
-        token: null
+        token: null,
+        isAuthenticated:false
     });
 }
 

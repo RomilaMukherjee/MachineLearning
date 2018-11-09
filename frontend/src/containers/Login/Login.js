@@ -4,23 +4,44 @@ import { connect } from 'react-redux';
 //import { NavLink } from 'react-router-dom';
 import * as actions from '../../store/actions/auth';
 //import D3Chart from '../../Chart'
+import axios from "axios";
+import { bindActionCreators } from 'redux';
+import { storeAuthentication } from '../../store/actions/auth';
 
 const FormItem = Form.Item;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 
 class NormalLoginForm extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+          isAuthenticated: false
+        };
+      }
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onAuth(values.userName, values.password);
-        if(this.props.isAuthenticated){
-            this.props.history.push('/chart');
-        }
-        else{
-            this.props.history.push('/');
-        } 
+        axios.get("http://127.0.0.1:8000/webapp/login/?username=dharani&password=pass@1234").then(res => {
+            console.log(res.data);
+            console.log(res.data.authenticated);
+            if(res.data.authenticated){
+                this.props.history.push('/map');
+                this.setState({ isAuthenticated: res.data.authenticated});
+                this.props.isAuthenticated = true;  
+                console.log("int "+this.props.isAuthenticated);  
+                }
+            else{
+                this.props.history.push('/');
+                this.setState({ isAuthenticated: res.data.authenticated});
+                this.props.isAuthenticated = false;
+                console.log("inaft "+this.props.isAuthenticated);
+                } 
+                console.log("aft "+this.props.isAuthenticated);
+                return this.props.isAuthenticated;
+          });
+          
       }
     });
   }
@@ -67,7 +88,9 @@ class NormalLoginForm extends React.Component {
                         Login
                     </Button>
                     </FormItem>
+                   
                 </Form>
+                
             }
       </div>
     );
@@ -80,15 +103,13 @@ const mapStateToProps = (state) => {
     return {
         loading: state.loading,
         error: state.error,
-        isAuthenticated:true
-         //isAuthenticated: state.token !== null
+        isAuthenticated: state.isAuthenticated
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (username, password) => dispatch(actions.authLogin(username, password)) 
-    }
-}
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({
+        storeAuthentication
+    }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm);

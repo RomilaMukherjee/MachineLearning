@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^region/', employeeList.as_view()),
     url('data', employeeList.get),
     url('monthlychart/', employeeList.displayMonthlyChart),
+    url('login/', employeeList.auth),
 ]

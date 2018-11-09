@@ -7,5 +7,11 @@ class employeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = employee
         fields = '__all__'
+       # model = region
+        #fields = '__all__'
+
+class regionSerializer(serializers.ModelSerializer):
+    class Meta:
+        
         model = region
-        fields = '__all__'
+        fields = '__all__'        

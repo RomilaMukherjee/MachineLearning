@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import GoogleMapLoader from "react-google-maps-loader";
 import GooglePlacesSuggest from "react-google-places-suggest";
 import "../App/App.css";
+import axios from "axios";
 
 const MY_API_KEY = "AIzaSyBbEJXlZq7VqPqY3jUITMsy_ZWlgVUhyvQ" 
 class Popup extends React.Component {
@@ -96,8 +97,9 @@ class MapR extends React.Component {
       });
     }
     componentDidMount() {
-        fetch('http://localhost:8080/region')
+        axios.get('http://127.0.0.1:8000/webapp/regdata')
          .then(function(res) {
+             console.log(res.data);
              return res.json();
          }).then(function(json) {
              this.setState({

@@ -6,18 +6,21 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import employee
 from .models import region
+from webapp.models import employee,region
+from django.utils import timezone
 from .serializers import employeeSerializer
+from .serializers import regionSerializer
 import json
 
 
 class employeeList(APIView):
 
-    def getEmp(self, request):
+    def getEmp(request):
         employees1 = employee.objects.all()
         serailizer = employeeSerializer(employees1, many=True)
         return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
 
-    def post(self):
+    def postEmp(self):
         pass
 
     def displayMonthlyChart(request):
@@ -26,11 +29,11 @@ class employeeList(APIView):
            {"id": "2018-11-13", "value": "8235.8515625"}]}
         return HttpResponse(json.dumps(json_string), content_type='application/json')
 
-    def getReg(self, request):
+    def getReg(request):
         region1 = region.objects.all()
-        serailizer = employeeSerializer(region1, many=True)
+        serailizer = regionSerializer(region1, many=True)
         return HttpResponse(json.dumps(serailizer.data), content_type="application/json")
-    def post(self):
+    def postReg(self):
         pass
 
     def auth(request):   

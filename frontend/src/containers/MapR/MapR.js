@@ -58,7 +58,7 @@ class Popup extends React.Component {
                             onChange={this.handleInputChange}
                             style={{marginLeft: '-187px'}}
                         />
-                        <button className="btn btn-default" style={{mariginLeft:'50px',color: 'white', backgroundColor: 'blue'}}>Add</button>
+                        <button className="btn btn-default" onClick={this.props.closePopup} style={{mariginLeft:'50px',color: 'white', backgroundColor: 'blue'}}>Add</button>
                         <button onClick={this.props.closePopup} style={{mariginLeft:'60px',marginRight: '50px',color: 'white', backgroundColor: 'blue'}}>close</button>
 
                     </GooglePlacesSuggest>
@@ -91,6 +91,9 @@ class MapR extends React.Component {
      handleClick = () => {
       this.props.history.push("chart");
     }
+    handleAdminClick = () => {
+        this.props.history.push("admin/");
+      }
      togglePopup() {
       this.setState({
         showPopup: !this.state.showPopup
@@ -102,6 +105,12 @@ class MapR extends React.Component {
             this.setState({ values: res.data.regions });
          });
         }
+     handlePost(){
+         axios.post('http://127.0.0.1:8000/webapp/addReg/')
+         .then(res =>{
+
+         });
+     }   
              
   render() {
     return <div className="drop-down" style={{marginTop: '0px',marginBottom: '275px',marginLeft: '150px',marginRight: '150px'}}>

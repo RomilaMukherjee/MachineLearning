@@ -38,6 +38,11 @@ class employeeList(APIView):
     def postReg(self):
         pass
 
+    def create(self, validated_data):
+        region = region(name=validated_data.get('name', None))
+        region.save()
+        return true
+
     def auth(request):   
         if True:
             json_result = {"authenticated" :True}

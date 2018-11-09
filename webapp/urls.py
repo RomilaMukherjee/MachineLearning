@@ -10,4 +10,5 @@ urlpatterns = [
     url('regdata/', employeeList.getReg),
     url('monthlychart/', employeeList.displayMonthlyChart),
     url('login/', employeeList.auth),
+    url('addReg/', employeeList.create),
 ]

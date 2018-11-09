@@ -22,8 +22,9 @@ class NormalLoginForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
+        console.log(values.userName+"  "+values.password);  
       if (!err) {
-        axios.get("http://127.0.0.1:8000/webapp/login/?username=dharani&password=pass@1234").then(res => {
+        axios.get("http://127.0.0.1:8000/webapp/login/?username="+values.userName+"&password="+values.password).then(res => {   
             console.log(res.data);
             console.log(res.data.authenticated);
             if(res.data.authenticated){

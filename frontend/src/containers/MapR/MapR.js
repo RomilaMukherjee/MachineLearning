@@ -59,6 +59,7 @@ class Popup extends React.Component {
                         />
                         <button className="btn btn-default" style={{mariginLeft:'50px',color: 'white', backgroundColor: 'blue'}}>Add</button>
                         <button onClick={this.props.closePopup} style={{mariginLeft:'60px',marginRight: '50px',color: 'white', backgroundColor: 'blue'}}>close</button>
+
                     </GooglePlacesSuggest>
                 )
             }
@@ -108,6 +109,7 @@ class MapR extends React.Component {
     return <div className="drop-down">
     <p>Select a Region to View Prediction</p>
       <select style={{marginLeft: '200px'}}>{
+
          this.state.values.map((obj) => {
              return <option value={obj.id}>{obj.name}</option>
          })

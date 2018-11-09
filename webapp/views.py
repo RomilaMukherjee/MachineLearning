@@ -44,7 +44,7 @@ class employeeList(APIView):
         return true
 
     def auth(request):   
-        if True:
+        if employee.objects.filter(loginName__lte = request.GET.get('username')) & employee.objects.filter(password__lte = request.GET.get('password')):
             json_result = {"authenticated" :True}
         else:
             json_result = {"authenticated" :False}
